@@ -94,3 +94,15 @@ tween1:Play()
 tween1.Completed:Wait(X)
 end
 end)
+local Tab = Window:NewTab("Misc")
+local Section3 = Tab:NewSection("Misc")
+Section3:NewButton("old shop", "i deleted cookie wheels because it`s buggy", function()
+    game:GetService("Players").LocalPlayer.PlayerGui.ShopGui.MainFrame.TabFrame.ShopFrame.ScrollingFrameChests.FrameEvent["+3 Egg Cannons"].Visible = true
+game:GetService("Players").LocalPlayer.PlayerGui.ShopGui.MainFrame.TabFrame.ShopFrame.ScrollingFrameChests.FrameEvent["+5 Duel Harpoons"].Visible = true
+game:GetService("Players").LocalPlayer.PlayerGui.ShopGui.MainFrame.TabFrame.ShopFrame.ScrollingFrameChests.FrameEvent.Candle.Visible = true
+game:GetService("Players").LocalPlayer.PlayerGui.ShopGui.MainFrame.TabFrame.ShopFrame.ScrollingFrameChests.FrameEvent.FireworkC.Visible = true
+game:GetService("Players").LocalPlayer.PlayerGui.ShopGui.MainFrame.TabFrame.ShopFrame.ScrollingFrameChests.FrameEvent.JackOLantern.Visible = true
+game:GetService("Players").LocalPlayer.PlayerGui.ShopGui.MainFrame.TabFrame.ShopFrame.ScrollingFrameChests.FrameEvent.Visible = true
+game:GetService("Players").LocalPlayer.PlayerGui.ShopGui.MainFrame.TabFrame.ShopFrame.ScrollingFrameChests.LineEvent.Visible = true
+game:GetService("Players").LocalPlayer.PlayerGui.ShopGui.MainFrame.TabFrame.ShopFrame.ScrollingFrameChests.Frame2XXX.Visible = true
+end)
