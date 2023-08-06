@@ -1,3 +1,27 @@
+-- don`t copy all loadstring(game:HttpGet("https://raw.githubusercontent.com/KitMaksym/Roblox-Explotiting/main/babft"))() here
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/xHeptc/Kavo-UI-Library/main/source.lua"))()
 local Window = Library.CreateLib("babft disco: kit_maksym", "DarkTheme")
 local Tab = Window:NewTab("Quests")
