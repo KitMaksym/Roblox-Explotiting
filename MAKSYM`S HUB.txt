@@ -1,0 +1,72 @@
+local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/xHeptc/Kavo-UI-Library/main/source.lua"))()
+local Window = Library.CreateLib("babft disco: kit_maksym", "DarkTheme")
+local Tab = Window:NewTab("Quests")
+local Section = Tab:NewSection("Quests")
+Section:NewButton("FABBY", "spawns fabbi the duck", function()
+    workspace.QuestMakerEvent:FireServer(100)
+end)
+Section:NewButton("GIFT", "spawns gingerbread fight", function()
+    workspace.QuestMakerEvent:FireServer(99)
+end)
+Section:NewButton("CHRISTMAS", "spawn christmas quest", function()
+    workspace.QuestMakerEvent:FireServer(101)
+end)
+Section:NewButton("YOUR DAD", "nope", function()
+    workspace.QuestMakerEvent:FireServer(7)
+end)
+
+local Tab2 = Window:NewTab("Games")
+local Section2 = Tab2:NewSection("Games")
+Section2:NewButton("INNER CLOUD", "easter", function()    
+    local plr = game.Players.LocalPlayer;
+local Char = game.Players.LocalPlayer.Character;
+local Teleporting = game:GetService("TeleportService");
+local CFrameEnd1 = CFrame.new(631, 26, -46);
+local Time1 = 5;
+local tween1 = game:GetService("TweenService"):Create(Char.HumanoidRootPart, TweenInfo.new(Time1), {CFrame = CFrameEnd1});
+local CFrameEnd2 = CFrame.new(484, 68, 270);
+local Time2 = 5;
+local tween2 =  game:GetService("TweenService"):Create(Char.HumanoidRootPart, TweenInfo.new(Time2), {CFrame = CFrameEnd2});
+if game.PlaceId ~= 1930863474 then
+Teleporting:Teleport(1930863474, plr)
+else
+tween1:Play()
+tween1.Completed:Wait(X)
+end
+end)
+
+Section2:NewButton("WINTER PLACE", "i don`t recommend play rewards small", function()
+    local plr = game.Players.LocalPlayer;
+local Char = game.Players.LocalPlayer.Character;
+local Teleporting = game:GetService("TeleportService");
+local CFrameEnd1 = CFrame.new(631, 26, -46);
+local Time1 = 5;
+local tween1 = game:GetService("TweenService"):Create(Char.HumanoidRootPart, TweenInfo.new(Time1), {CFrame = CFrameEnd1});
+local CFrameEnd2 = CFrame.new(484, 68, 270);
+local Time2 = 5;
+local tween2 =  game:GetService("TweenService"):Create(Char.HumanoidRootPart, TweenInfo.new(Time2), {CFrame = CFrameEnd2});
+if game.PlaceId ~= 1930866268 then
+Teleporting:Teleport(1930866268, plr)
+else
+tween1:Play()
+tween1.Completed:Wait(X)
+end
+end)
+
+Section2:NewButton("the secret place(patched)", "NOOOOOOOOO CANDY GRINDER", function()
+    local plr = game.Players.LocalPlayer;
+local Char = game.Players.LocalPlayer.Character;
+local Teleporting = game:GetService("TeleportService");
+local CFrameEnd1 = CFrame.new(631, 26, -46);
+local Time1 = 5;
+local tween1 = game:GetService("TweenService"):Create(Char.HumanoidRootPart, TweenInfo.new(Time1), {CFrame = CFrameEnd1});
+local CFrameEnd2 = CFrame.new(484, 68, 270);
+local Time2 = 5;
+local tween2 =  game:GetService("TweenService"):Create(Char.HumanoidRootPart, TweenInfo.new(Time2), {CFrame = CFrameEnd2});
+if game.PlaceId ~= 1930665568 then
+Teleporting:Teleport(1930665568, plr)
+else
+tween1:Play()
+tween1.Completed:Wait(X)
+end
+end)
