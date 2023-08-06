@@ -90,95 +90,82 @@
 
 local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/xHeptc/Kavo-UI-Library/main/source.lua"))()
 local Window = Library.CreateLib("babft disco: kit_maksym", "DarkTheme")
-local Tab = Window:NewTab("Quests")
-local Section = Tab:NewSection("Quests")
-Section:NewButton("FABBY", "spawns fabbi the duck", function()
+
+local function teleportToPlace(placeId, position)
+    local plr = game.Players.LocalPlayer
+    local Char = plr.Character
+    local TeleportService = game:GetService("TeleportService")
+    local Time = 5
+    local tween = game:GetService("TweenService"):Create(Char.HumanoidRootPart, TweenInfo.new(Time), { CFrame = position })
+    
+    if game.PlaceId ~= placeId then
+        TeleportService:Teleport(placeId, plr)
+    else
+        tween:Play()
+        tween.Completed:Wait()
+    end
+end
+
+local TabQuests = Window:NewTab("Quests")
+local SectionQuests = TabQuests:NewSection("Quests")
+SectionQuests:NewButton("FABBY", "Spawns Fabbi the duck", function()
     workspace.QuestMakerEvent:FireServer(100)
 end)
-Section:NewButton("GIFT", "spawns gingerbread fight", function()
+SectionQuests:NewButton("GIFT", "Spawns Gingerbread fight", function()
     workspace.QuestMakerEvent:FireServer(99)
 end)
-Section:NewButton("CHRISTMAS", "spawn christmas quest", function()
+SectionQuests:NewButton("CHRISTMAS", "Spawn Christmas quest", function()
     workspace.QuestMakerEvent:FireServer(101)
 end)
-Section:NewButton("YOUR DAD", "nope", function()
+SectionQuests:NewButton("YOUR DAD", "Nope", function()
     workspace.QuestMakerEvent:FireServer(7)
 end)
 
-local Tab2 = Window:NewTab("Games")
-local Section2 = Tab2:NewSection("Games")
-Section2:NewButton("INNER CLOUD", "easter", function()    
-    local plr = game.Players.LocalPlayer;
-local Char = game.Players.LocalPlayer.Character;
-local Teleporting = game:GetService("TeleportService");
-local CFrameEnd1 = CFrame.new(631, 26, -46);
-local Time1 = 5;
-local tween1 = game:GetService("TweenService"):Create(Char.HumanoidRootPart, TweenInfo.new(Time1), {CFrame = CFrameEnd1});
-local CFrameEnd2 = CFrame.new(484, 68, 270);
-local Time2 = 5;
-local tween2 =  game:GetService("TweenService"):Create(Char.HumanoidRootPart, TweenInfo.new(Time2), {CFrame = CFrameEnd2});
-if game.PlaceId ~= 1930863474 then
-Teleporting:Teleport(1930863474, plr)
-else
-tween1:Play()
-tween1.Completed:Wait(X)
-end
+local TabGames = Window:NewTab("Games")
+local SectionGames = TabGames:NewSection("Games")
+SectionGames:NewButton("INNER CLOUD", "Easter", function()    
+    local CFrameEnd1 = CFrame.new(631, 26, -46)
+    local CFrameEnd2 = CFrame.new(484, 68, 270)
+    teleportToPlace(1930863474, CFrameEnd1)
+    teleportToPlace(1930866268, CFrameEnd2)
 end)
 
-Section2:NewButton("WINTER PLACE", "i don`t recommend play rewards small", function()
-    local plr = game.Players.LocalPlayer;
-local Char = game.Players.LocalPlayer.Character;
-local Teleporting = game:GetService("TeleportService");
-local CFrameEnd1 = CFrame.new(631, 26, -46);
-local Time1 = 5;
-local tween1 = game:GetService("TweenService"):Create(Char.HumanoidRootPart, TweenInfo.new(Time1), {CFrame = CFrameEnd1});
-local CFrameEnd2 = CFrame.new(484, 68, 270);
-local Time2 = 5;
-local tween2 =  game:GetService("TweenService"):Create(Char.HumanoidRootPart, TweenInfo.new(Time2), {CFrame = CFrameEnd2});
-if game.PlaceId ~= 1930866268 then
-Teleporting:Teleport(1930866268, plr)
-else
-tween1:Play()
-tween1.Completed:Wait(X)
-end
+SectionGames:NewButton("WINTER PLACE", "I don't recommend playing, rewards are small", function()
+    local CFrameEnd1 = CFrame.new(631, 26, -46)
+    local CFrameEnd2 = CFrame.new(484, 68, 270)
+    teleportToPlace(1930866268, CFrameEnd1)
+    teleportToPlace(1930665568, CFrameEnd2)
 end)
 
-Section2:NewButton("the secret place(patched)", "NOOOOOOOOO CANDY GRINDER", function()
-    local plr = game.Players.LocalPlayer;
-local Char = game.Players.LocalPlayer.Character;
-local Teleporting = game:GetService("TeleportService");
-local CFrameEnd1 = CFrame.new(631, 26, -46);
-local Time1 = 5;
-local tween1 = game:GetService("TweenService"):Create(Char.HumanoidRootPart, TweenInfo.new(Time1), {CFrame = CFrameEnd1});
-local CFrameEnd2 = CFrame.new(484, 68, 270);
-local Time2 = 5;
-local tween2 =  game:GetService("TweenService"):Create(Char.HumanoidRootPart, TweenInfo.new(Time2), {CFrame = CFrameEnd2});
-if game.PlaceId ~= 1930665568 then
-Teleporting:Teleport(1930665568, plr)
-else
-tween1:Play()
-tween1.Completed:Wait(X)
-end
+SectionGames:NewButton("the secret place(patched)", "NOOOOOOOOO CANDY GRINDER", function()
+    local CFrameEnd1 = CFrame.new(631, 26, -46)
+    local CFrameEnd2 = CFrame.new(484, 68, 270)
+    teleportToPlace(1930665568, CFrameEnd1)
+    teleportToPlace(1930665568, CFrameEnd2)
 end)
-local Tab = Window:NewTab("Misc")
-local Section3 = Tab:NewSection("Misc")
-Section3:NewButton("old shop", "i deleted cookie wheels because it`s buggy", function()
-    game:GetService("Players").LocalPlayer.PlayerGui.ShopGui.MainFrame.TabFrame.ShopFrame.ScrollingFrameChests.FrameEvent["+3 Egg Cannons"].Visible = true
-game:GetService("Players").LocalPlayer.PlayerGui.ShopGui.MainFrame.TabFrame.ShopFrame.ScrollingFrameChests.FrameEvent["+5 Duel Harpoons"].Visible = true
-game:GetService("Players").LocalPlayer.PlayerGui.ShopGui.MainFrame.TabFrame.ShopFrame.ScrollingFrameChests.FrameEvent.Candle.Visible = true
-game:GetService("Players").LocalPlayer.PlayerGui.ShopGui.MainFrame.TabFrame.ShopFrame.ScrollingFrameChests.FrameEvent.FireworkC.Visible = true
-game:GetService("Players").LocalPlayer.PlayerGui.ShopGui.MainFrame.TabFrame.ShopFrame.ScrollingFrameChests.FrameEvent.JackOLantern.Visible = true
-game:GetService("Players").LocalPlayer.PlayerGui.ShopGui.MainFrame.TabFrame.ShopFrame.ScrollingFrameChests.FrameEvent.Visible = true
-game:GetService("Players").LocalPlayer.PlayerGui.ShopGui.MainFrame.TabFrame.ShopFrame.ScrollingFrameChests.LineEvent.Visible = true
-game:GetService("Players").LocalPlayer.PlayerGui.ShopGui.MainFrame.TabFrame.ShopFrame.ScrollingFrameChests.Frame2XXX.Visible = true
+
+local TabMisc = Window:NewTab("Misc")
+local SectionMisc = TabMisc:NewSection("Misc")
+SectionMisc:NewButton("old shop", "I deleted cookie wheels because it's buggy", function()
+    local ShopGui = game:GetService("Players").LocalPlayer.PlayerGui.ShopGui
+    ShopGui.MainFrame.TabFrame.ShopFrame.ScrollingFrameChests.FrameEvent["+3 Egg Cannons"].Visible = true
+    ShopGui.MainFrame.TabFrame.ShopFrame.ScrollingFrameChests.FrameEvent["+5 Duel Harpoons"].Visible = true
+    ShopGui.MainFrame.TabFrame.ShopFrame.ScrollingFrameChests.FrameEvent.Candle.Visible = true
+    ShopGui.MainFrame.TabFrame.ShopFrame.ScrollingFrameChests.FrameEvent.FireworkC.Visible = true
+    ShopGui.MainFrame.TabFrame.ShopFrame.ScrollingFrameChests.FrameEvent.JackOLantern.Visible = true
+    ShopGui.MainFrame.TabFrame.ShopFrame.ScrollingFrameChests.FrameEvent.Visible = true
+    ShopGui.MainFrame.TabFrame.ShopFrame.ScrollingFrameChests.LineEvent.Visible = true
+    ShopGui.MainFrame.TabFrame.ShopFrame.ScrollingFrameChests.Frame2XXX.Visible = true
 end)
-Section3:NewButton("old shop V2 first better ", "yea", function()
-    game:GetService("Players").LocalPlayer.PlayerGui.ShopGui.MainFrame.TabFrame.ShopFrame.ScrollingFrameChests.FrameEvent["+4 Cookie Wheels"].Visible = true
-game:GetService("Players").LocalPlayer.PlayerGui.ShopGui.MainFrame.TabFrame.ShopFrame.ScrollingFrameChests.FrameEvent["+5 Duel Harpoons"].Visible = true
-game:GetService("Players").LocalPlayer.PlayerGui.ShopGui.MainFrame.TabFrame.ShopFrame.ScrollingFrameChests.FrameEvent["Winter Chest"].Visible = true
-game:GetService("Players").LocalPlayer.PlayerGui.ShopGui.MainFrame.TabFrame.ShopFrame.ScrollingFrameChests.FrameEvent.FireworkC.Visible = true
-game:GetService("Players").LocalPlayer.PlayerGui.ShopGui.MainFrame.TabFrame.ShopFrame.ScrollingFrameChests.FrameEvent.JackOLantern.Visible = true
-game:GetService("Players").LocalPlayer.PlayerGui.ShopGui.MainFrame.TabFrame.ShopFrame.ScrollingFrameChests.FrameEvent.Visible = true
-game:GetService("Players").LocalPlayer.PlayerGui.ShopGui.MainFrame.TabFrame.ShopFrame.ScrollingFrameChests.LineEvent.Visible = true
-game:GetService("Players").LocalPlayer.PlayerGui.ShopGui.MainFrame.TabFrame.ShopFrame.ScrollingFrameChests.Frame2XXX.Visible = true
+
+SectionMisc:NewButton("old shop V2 first better", "Yea", function()
+    local ShopGui = game:GetService("Players").LocalPlayer.PlayerGui.ShopGui
+    ShopGui.MainFrame.TabFrame.ShopFrame.ScrollingFrameChests.FrameEvent["+4 Cookie Wheels"].Visible = true
+    ShopGui.MainFrame.TabFrame.ShopFrame.ScrollingFrameChests.FrameEvent["+5 Duel Harpoons"].Visible = true
+    ShopGui.MainFrame.TabFrame.ShopFrame.ScrollingFrameChests.FrameEvent["Winter Chest"].Visible = true
+    ShopGui.MainFrame.TabFrame.ShopFrame.ScrollingFrameChests.FrameEvent.FireworkC.Visible = true
+    ShopGui.MainFrame.TabFrame.ShopFrame.ScrollingFrameChests.FrameEvent.JackOLantern.Visible = true
+    ShopGui.MainFrame.TabFrame.ShopFrame.ScrollingFrameChests.FrameEvent.Visible = true
+    ShopGui.MainFrame.TabFrame.ShopFrame.ScrollingFrameChests.LineEvent.Visible = true
+    ShopGui.MainFrame.TabFrame.ShopFrame.ScrollingFrameChests.Frame2XXX.Visible = true
 end)
