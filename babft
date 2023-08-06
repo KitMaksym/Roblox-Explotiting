@@ -96,13 +96,12 @@ Section:NewButton("FABBY", "spawns fabbi the duck", function()
     workspace.QuestMakerEvent:FireServer(100)
 end)
 Section:NewButton("auto spawn fabby ", "yea", function()
-for i = 1, math.huge
 while true do
 wait(1)
 game:GetService("Players").LocalPlayer.Data.Bread.Changed:Connect(function()
 workspace.QuestMakerEvent:FireServer(100)
-end
 end)
+end
 end)
 Section:NewButton("GIFT", "spawns gingerbread fight", function()
     workspace.QuestMakerEvent:FireServer(99)
