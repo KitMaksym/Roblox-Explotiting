@@ -177,7 +177,7 @@ SectionMisc:NewButton("old shop V2 first better", "Yea", function()
     ShopGui.MainFrame.TabFrame.ShopFrame.ScrollingFrameChests.LineEvent.Visible = true
     ShopGui.MainFrame.TabFrame.ShopFrame.ScrollingFrameChests.Frame2XXX.Visible = true
 end)
-SectionMisc:NewButton("firework shop", "Yea", function()
+SectionMisc:NewButton("firework shop", "ok", function()
    ShopGui.MainFrame.TabFrame.ShopFrame.ScrollingFrameChests.LineEvent.Visible = true
     ShopGui.MainFrame.TabFrame.ShopFrame.ScrollingFrameChests.FrameEvent.FireworkA.Visible = true
 ShopGui.MainFrame.TabFrame.ShopFrame.ScrollingFrameChests.FrameEvent.FireworkB.Visible = true
