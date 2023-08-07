@@ -172,7 +172,7 @@ SectionMisc:NewButton("old shop V2 first better", "Yea", function()
     ShopGui.MainFrame.TabFrame.ShopFrame.ScrollingFrameChests.FrameEvent["+5 Duel Harpoons"].Visible = true
     ShopGui.MainFrame.TabFrame.ShopFrame.ScrollingFrameChests.FrameEvent["Winter Chest"].Visible = true
     ShopGui.MainFrame.TabFrame.ShopFrame.ScrollingFrameChests.FrameEvent.FireworkC.Visible = true
-    ShopGui.MainFrame.TabFrame.ShopFrame.ScrollingFrameChests.FrameEvent.JackOLantern.Visible = true
+    ShopGui.MainFrame.TabFrame.ShopFrame.ScrollingFrameChests.FrameEvent.Gift4.Visible = true
     ShopGui.MainFrame.TabFrame.ShopFrame.ScrollingFrameChests.FrameEvent.Visible = true
     ShopGui.MainFrame.TabFrame.ShopFrame.ScrollingFrameChests.LineEvent.Visible = true
     ShopGui.MainFrame.TabFrame.ShopFrame.ScrollingFrameChests.Frame2XXX.Visible = true
