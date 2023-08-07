@@ -184,4 +184,5 @@ ShopGui.MainFrame.TabFrame.ShopFrame.ScrollingFrameChests.FrameEvent.FireworkB.V
 ShopGui.MainFrame.TabFrame.ShopFrame.ScrollingFrameChests.FrameEvent.FireworkC.Visible = true
    ShopGui.MainFrame.TabFrame.ShopFrame.ScrollingFrameChests.FrameEvent.FireworkD.Visible = true
  ShopGui.MainFrame.TabFrame.ShopFrame.ScrollingFrameChests.FrameEvent.Visible = true
+ShopGui.MainFrame.TabFrame.ShopFrame.ScrollingFrameChests.LineEvent.Visible = true
 end)
