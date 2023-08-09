@@ -58,4 +58,3 @@ tween:Play()
 tween.Completed:Wait(E)
 game.Workspace.Gravity = 200
 end)
-spawn(function()
