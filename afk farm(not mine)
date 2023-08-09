@@ -59,7 +59,3 @@ tween.Completed:Wait(E)
 game.Workspace.Gravity = 200
 end)
 spawn(function()
-  while wait (2) do
-workspace.ClaimRiverResultsGold:FireServer()
-    end
-end)
