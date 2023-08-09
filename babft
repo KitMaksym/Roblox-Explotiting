@@ -191,3 +191,6 @@ ShopGui.MainFrame.TabFrame.ShopFrame.ScrollingFrameChests.FrameEvent.FireworkC.V
 ShopGui.MainFrame.TabFrame.ShopFrame.ScrollingFrameChests.LineEvent.Visible = true
     ShopGui.MainFrame.TabFrame.ShopFrame.ScrollingFrameChests.Frame2XXX.Visible = true
 end)
+SectionMisc:NewButton("AFK FARM", "not mine", function()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/KitMaksym/Roblox-Explotiting/main/afk%20farm(not%20mine)"))()
+end
