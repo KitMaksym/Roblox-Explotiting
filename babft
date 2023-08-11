@@ -83,6 +83,8 @@ SectionMisc:NewButton("old shop", "I deleted cookie wheels because it's buggy", 
     ShopGui.MainFrame.TabFrame.ShopFrame.ScrollingFrameChests.Frame2XXX.Visible = true
 game:GetService("Players").LocalPlayer.PlayerGui.ShopGui.MainFrame.TabFrame.ShopFrame.ScrollingFrameChests.Frame_008.Magnets.Visible = false
 game:GetService("Players").LocalPlayer.PlayerGui.ShopGui.MainFrame.TabFrame.ShopFrame.ScrollingFrameChests.Frame_008.GiftGroup.Visible = true
+game:GetService("Players").LocalPlayer.PlayerGui.ShopGui.MainFrame.TabFrame.ShopFrame.ScrollingFrameChests.Frame_005.Balloons.Visible = false
+game:GetService("Players").LocalPlayer.PlayerGui.ShopGui.MainFrame.TabFrame.ShopFrame.ScrollingFrameChests.Frame_005["+5 Mega Thrusters"].Visible = true
 end)
 
 SectionMisc:NewButton("old shop V2 first better", "Yea", function()
@@ -98,6 +100,8 @@ game:GetService("Players").LocalPlayer.PlayerGui.ShopGui.MainFrame.TabFrame.Shop
     ShopGui.MainFrame.TabFrame.ShopFrame.ScrollingFrameChests.FrameEvent.Visible = true
     ShopGui.MainFrame.TabFrame.ShopFrame.ScrollingFrameChests.LineEvent.Visible = true
     ShopGui.MainFrame.TabFrame.ShopFrame.ScrollingFrameChests.Frame2XXX.Visible = true
+game:GetService("Players").LocalPlayer.PlayerGui.ShopGui.MainFrame.TabFrame.ShopFrame.ScrollingFrameChests.Frame_005.Balloons.Visible = false
+game:GetService("Players").LocalPlayer.PlayerGui.ShopGui.MainFrame.TabFrame.ShopFrame.ScrollingFrameChests.Frame_005["+5 Mega Thrusters"].Visible = true
     -- Set your ShopGui properties here
 end)
 
