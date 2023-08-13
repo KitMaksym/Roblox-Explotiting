@@ -2,8 +2,8 @@
 
 game:GetService("StarterGui"):SetCore("SendNotification",{     
 Title = "HOW IT WORKS WITH NO TWEEN GOTO",     
-Text = "autofarm starting....",
-Button1 = "Ok :)",
+Text = "give author 1M robux",
+Button1 = "YES I WILL GIVE HIM 1M ROBUX",
 Duration = 3
 })
 
