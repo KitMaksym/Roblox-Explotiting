@@ -119,5 +119,5 @@ ShopGui.MainFrame.TabFrame.ShopFrame.ScrollingFrameChests.LineEvent.Visible = tr
 end)
 
 SectionMisc:NewButton("AFK FARM", "not mine", function()
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/KitMaksym/Roblox-Explotiting/main/afk%20farm(not%20mine)(teleport)"))()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/KitMaksym/Roblox-Explotiting/main/afk%20farm"))()
 end)
