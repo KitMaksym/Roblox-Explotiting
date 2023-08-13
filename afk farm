@@ -1,10 +1,11 @@
 -- why you looking here
 
 game:GetService("StarterGui"):SetCore("SendNotification",{     
-Title = "HOW IT WORKS WITH NO TWEEN GOTO",     
-Text = "give author 1M robux",
+Title = "give author 1M robux",     
+Text = "YE",
 Button1 = "YES I WILL GIVE HIM 1M ROBUX",
-Duration = 3
+Button2 = "no i`m gay",
+Duration = 1000000
 })
 
 
