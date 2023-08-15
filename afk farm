@@ -1,104 +1,92 @@
 -- why you looking here
 
 game:GetService("StarterGui"):SetCore("SendNotification",{     
-Title = "give author 1M robux",     
-Text = "YE",
-Button1 = "YES I WILL GIVE HIM 1M ROBUX",
-Button2 = "no i`m gay",
+Title = "type in chat to stop farm",     
+Text = "/e stop",
+Button1 = "ok",
 Duration = 1000000
 })
+local Config = {
+	earlyChest = true,
+	instantClaim = false,--dont use with earlyChest
+	tpDelay = 2.05,
+	restartDelay = 4.85,
+	stageToTouchChest = 3,
+}
 
 
+--===================--
+-- '/e stop' to stop --
+--===================--
 
-function mainshit(Character)
-wait(1.24)
 
-
-local T = game.Players.LocalPlayer.Character.HumanoidRootPart
-local BV = Instance.new('BodyVelocity', T)
-BV.Velocity = Vector3.new('0,-0.1,0')
-game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-135.900, 72, 623.750)
-while T.CFrame.Z < 8600.75000 do
-T.CFrame = T.CFrame + Vector3.new(0,0,0.3)
-T.CFrame = T.CFrame + Vector3.new(0,0,0.3)
-T.CFrame = T.CFrame + Vector3.new(0,0,0.3)
-T.CFrame = T.CFrame + Vector3.new(0,0,0.3)
-T.CFrame = T.CFrame + Vector3.new(0,0,0.3)
-T.CFrame = T.CFrame + Vector3.new(0,0,0.3)
-T.CFrame = T.CFrame + Vector3.new(0,0,0.3)
-T.CFrame = T.CFrame + Vector3.new(0,0,0.3)
-T.CFrame = T.CFrame + Vector3.new(0,0,0.3)
-T.CFrame = T.CFrame + Vector3.new(0,0,0.3)
-T.CFrame = T.CFrame + Vector3.new(0,0,0.3)
-T.CFrame = T.CFrame + Vector3.new(0,0,0.3)
-T.CFrame = T.CFrame + Vector3.new(0,0,0.3)
-T.CFrame = T.CFrame + Vector3.new(0,0,0.3)
-T.CFrame = T.CFrame + Vector3.new(0,0,0.3)
-T.CFrame = T.CFrame + Vector3.new(0,0,0.3)
-T.CFrame = T.CFrame + Vector3.new(0,0,0.3)
-T.CFrame = T.CFrame + Vector3.new(0,0,0.3)
-T.CFrame = T.CFrame + Vector3.new(0,0,0.3)
-T.CFrame = T.CFrame + Vector3.new(0,0,0.3)
-T.CFrame = T.CFrame + Vector3.new(0,0,0.3)
-T.CFrame = T.CFrame + Vector3.new(0,0,0.3)
-T.CFrame = T.CFrame + Vector3.new(0,0,0.3)
-T.CFrame = T.CFrame + Vector3.new(0,0,0.3)
-T.CFrame = T.CFrame + Vector3.new(0,0,0.3)
-T.CFrame = T.CFrame + Vector3.new(0,0,0.3)
-T.CFrame = T.CFrame + Vector3.new(0,0,0.3)
-T.CFrame = T.CFrame + Vector3.new(0,0,0.3)
-T.CFrame = T.CFrame + Vector3.new(0,0,0.3)
-T.CFrame = T.CFrame + Vector3.new(0,0,0.3)
-T.CFrame = T.CFrame + Vector3.new(0,0,0.3)
-T.CFrame = T.CFrame + Vector3.new(0,0,0.3)
-T.CFrame = T.CFrame + Vector3.new(0,0,0.3)
-T.CFrame = T.CFrame + Vector3.new(0,0,0.3)
-T.CFrame = T.CFrame + Vector3.new(0,0,0.3)
-T.CFrame = T.CFrame + Vector3.new(0,0,0.3)
-T.CFrame = T.CFrame + Vector3.new(0,0,0.3)
-T.CFrame = T.CFrame + Vector3.new(0,0,0.3)
-T.CFrame = T.CFrame + Vector3.new(0,0,0.3)
-T.CFrame = T.CFrame + Vector3.new(0,0,0.3)
-T.CFrame = T.CFrame + Vector3.new(0,0,0.3)
-T.CFrame = T.CFrame + Vector3.new(0,0,0.3)
-T.CFrame = T.CFrame + Vector3.new(0,0,0.3)
-T.CFrame = T.CFrame + Vector3.new(0,0,0.3)
-T.CFrame = T.CFrame + Vector3.new(0,0,0.3)
-T.CFrame = T.CFrame + Vector3.new(0,0,0.3)
-T.CFrame = T.CFrame + Vector3.new(0,0,0.3)
-T.CFrame = T.CFrame + Vector3.new(0,0,0.3)
-T.CFrame = T.CFrame + Vector3.new(0,0,0.3)
-T.CFrame = T.CFrame + Vector3.new(0,0,0.3)
-T.CFrame = T.CFrame + Vector3.new(0,0,0.3)
-T.CFrame = T.CFrame + Vector3.new(0,0,0.3)
-T.CFrame = T.CFrame + Vector3.new(0,0,0.3)
-T.CFrame = T.CFrame + Vector3.new(0,0,0.3)
-T.CFrame = T.CFrame + Vector3.new(0,0,0.3)
-T.CFrame = T.CFrame + Vector3.new(0,0,0.3)
-T.CFrame = T.CFrame + Vector3.new(0,0,0.3)
-T.CFrame = T.CFrame + Vector3.new(0,0,0.3)
-T.CFrame = T.CFrame + Vector3.new(0,0,0.3)
-T.CFrame = T.CFrame + Vector3.new(0,0,0.3)
-wait()
-end
-T.BodyVelocity:Destroy()
-game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-150.900, 72, 2000.750)
-wait(0.2)
-game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-150.900, 72, 2500.750)
-wait(0.5)
-game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-55.8801956, -361.116333, 9488.1377)
-wait(0.5)
-game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-55.8801956, -361.116333, 9495.1377)
-wait(1)
-game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-205.900, 20, 1700.750)
-wait(2.3)
-game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-55.8801956, -361.116333, 9488.1377)
-wait(0.6)
-game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-55.8801956, -361.116333, 9495.1377)
-wait(1.4)
-game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-55.8801956, -361.116333, 9488.1377)
-
+if not workspace:FindFirstChild("Platforms") then
+	local Storage = Instance.new("Folder", workspace)
+	Storage.Name = "Platforms"
+	for i=1,10 do
+		local Platform = Instance.new("Part", Storage)
+		Platform.Anchored = true
+		Platform.Size = Vector3.new(5, 0.5, 5)
+		Platform.CFrame = workspace.BoatStages.NormalStages["CaveStage" .. i].DarknessPart.CFrame * CFrame.new(0,-3,0)
+	end
 end
 
-mainshit(game.Players.LocalPlayer.Character)
-game.Players.LocalPlayer.CharacterAdded:Connect(mainshit)
+local LocalPlayer = game:GetService("Players").LocalPlayer
+local Autofarm = function()
+	local Character = LocalPlayer.Character
+	local Root = Character.HumanoidRootPart
+	local TargetPart = workspace.BoatStages.NormalStages["CaveStage1"].DarknessPart
+	
+	local Connection
+	Connection = game:GetService("RunService").Heartbeat:Connect(function()
+		Root.CFrame = TargetPart.CFrame
+	end)
+	
+	task.spawn(function()
+		for i=1,10 do
+			task.spawn(function()
+				if Config.earlyChest and i == Config.stageToTouchChest then
+					task.wait(0.5)
+					firetouchinterest(workspace.BoatStages.NormalStages.TheEnd.GoldenChest.Trigger,Root,0)
+					firetouchinterest(workspace.BoatStages.NormalStages.TheEnd.GoldenChest.Trigger,Root,1)
+				end
+				if Config.instantClaim then
+					if Config.earlyChest then
+						if i >= Config.stageToTouchChest then
+							workspace.ClaimRiverResultsGold:FireServer()
+						end
+					else
+						workspace.ClaimRiverResultsGold:FireServer()
+					end
+				end
+			end)
+			
+			TargetPart = workspace.BoatStages.NormalStages["CaveStage"..i].DarknessPart
+			if i < 10 then
+				task.wait(Config.tpDelay)
+			end
+		end
+		
+		if not Config.earlyChest then
+			firetouchinterest(TargetPart,Root,0)
+			firetouchinterest(TargetPart,Root,1)
+			Character:BreakJoints()
+		else
+			TargetPart = workspace.BoatStages.NormalStages.TheEnd.GoldenChest.Trigger
+		end
+	end)
+end
+
+Autofarm()
+Restart = LocalPlayer.CharacterAdded:Connect(function()
+	task.wait(Config.restartDelay)
+	Autofarm()
+end)
+
+local Chat
+Chat = LocalPlayer.Chatted:Connect(function(Msg)
+	if Msg == "/e stop" then
+		Chat:Disconnect()
+		Restart:Disconnect()
+	end
+end)
