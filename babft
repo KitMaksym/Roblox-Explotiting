@@ -40,7 +40,7 @@ SectionQuests:NewButton("CHRISTMAS", "Spawn Christmas quest", function()
     workspace.QuestMakerEvent:FireServer(101)
 end)
 
-SectionQuests:NewButton("YOUR DAD", "Nope", function()
+SectionQuests:NewButton("RINGS(patched)", "Nope", function()
     workspace.QuestMakerEvent:FireServer(7)
 end)
 
