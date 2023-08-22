@@ -1,1 +1,104 @@
-nope
+local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/xHeptc/Kavo-UI-Library/main/source.lua"))()
+local Window = Library.CreateLib("tower heroes disco: kit_maksym", "DarkTheme")
+local Tab = Window:NewTab("Game")
+local Section = Tab:NewSection("Game")
+SectionGame:NewToggle("auto upgrade", "desc lol", function(state)
+    if state then
+-- Auto Upgrade
+_G.AutoUpgrade = true; -- change to false to stop
+
+-- Lot of remote spam so its best to keep the wait higher.
+while _G.AutoUpgrade do
+    wait(5)
+    local children = game:GetService("Workspace").Troop:GetChildren()
+    for i = 1, #children do
+        if children[i].Stats.Owner.Value == game:GetService("Players").LocalPlayer.Name then -- Ensure their our little guys.
+            game:GetService("ReplicatedStorage").Events.TroopEvent:FireServer("Upgrade", children[i])
+        end
+    end
+end
+    else
+-- Auto Upgrade
+_G.AutoUpgrade = false; -- change to false to stop
+
+-- Lot of remote spam so its best to keep the wait higher.
+while _G.AutoUpgrade do
+    wait(5)
+    local children = game:GetService("Workspace").Troop:GetChildren()
+    for i = 1, #children do
+        if children[i].Stats.Owner.Value == game:GetService("Players").LocalPlayer.Name then -- Ensure their our little guys.
+            game:GetService("ReplicatedStorage").Events.TroopEvent:FireServer("Upgrade", children[i])
+        end
+    end
+end
+    end
+end)
+SectionGame:NewToggle("auto place", "who reading this?", function(state)
+    if state then
+-- Auto Placement
+_G.AutoPlacer = true; -- change to false to stop.
+
+while _G.AutoPlacer do
+    wait(5)
+    
+   -- Placed Troops (All of them)
+   local placedtroops = game.Workspace.Troop:GetChildren()
+   
+   -- See what player has to select from
+   local menu = game.Players.LocalPlayer.PlayerGui.Menu.Inventory
+   local mitem1 = menu["1"].TroopFrame.TroopModule.Value
+   local mitem2 = menu["2"].TroopFrame.TroopModule.Value
+   local mitem3 = menu["3"].TroopFrame.TroopModule.Value
+   local mitem4 = menu["4"].TroopFrame.TroopModule.Value
+   
+   -- Put menu items into table to random select.
+   local menutable = {mitem1, mitem2, mitem3, mitem4}
+   local value = math.random(1, #menutable) -- Random Select.
+   
+   -- Select randomly and place em for us
+   local otroopselect =  math.random(1, #placedtroops)
+   local otroop = placedtroops[otroopselect]
+   
+    if otroop.Stats.Owner.Value ~= game.Players.LocalPlayer.Name then
+        if otroop.Name ~= "Lemonade Cat" and otroop.Name ~= "Slime King" then -- Normally people stick these out of the way and you don't want troops doing nothing.
+            local value = math.random(1, #menutable) -- Random Select from our menu..
+            warn("Placing: " .. tostring(value))
+            game:GetService("ReplicatedStorage").Events.TroopPlace:FireServer(game:GetService("ReplicatedStorage").Troops[tostring(menutable[value])], otroop.PrimaryPart.Position, 0)
+        end
+    end
+end
+    else
+-- Auto Placement
+_G.AutoPlacer = false; -- change to false to stop.
+
+while _G.AutoPlacer do
+    wait(5)
+    
+   -- Placed Troops (All of them)
+   local placedtroops = game.Workspace.Troop:GetChildren()
+   
+   -- See what player has to select from
+   local menu = game.Players.LocalPlayer.PlayerGui.Menu.Inventory
+   local mitem1 = menu["1"].TroopFrame.TroopModule.Value
+   local mitem2 = menu["2"].TroopFrame.TroopModule.Value
+   local mitem3 = menu["3"].TroopFrame.TroopModule.Value
+   local mitem4 = menu["4"].TroopFrame.TroopModule.Value
+   
+   -- Put menu items into table to random select.
+   local menutable = {mitem1, mitem2, mitem3, mitem4}
+   local value = math.random(1, #menutable) -- Random Select.
+   
+   -- Select randomly and place em for us
+   local otroopselect =  math.random(1, #placedtroops)
+   local otroop = placedtroops[otroopselect]
+   
+    if otroop.Stats.Owner.Value ~= game.Players.LocalPlayer.Name then
+        if otroop.Name ~= "Lemonade Cat" and otroop.Name ~= "Slime King" then -- Normally people stick these out of the way and you don't want troops doing nothing.
+            local value = math.random(1, #menutable) -- Random Select from our menu..
+            warn("Placing: " .. tostring(value))
+            game:GetService("ReplicatedStorage").Events.TroopPlace:FireServer(game:GetService("ReplicatedStorage").Troops[tostring(menutable[value])], otroop.PrimaryPart.Position, 0)
+        end
+    end
+end
+    end
+end)
