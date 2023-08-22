@@ -7,3 +7,9 @@ if game.PlaceId == 9476339275 then
     local scriptUrl = "https://raw.githubusercontent.com/KitMaksym/Roblox-Explotiting/main/double%20down"
     loadstring(game:HttpGet(scriptUrl))()
 end
+if game.PlaceId == 4646477729 then
+print(nah)
+end
+if game.PlaceId == 4870839149 then
+print(nah)
+end
