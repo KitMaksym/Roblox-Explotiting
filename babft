@@ -81,17 +81,16 @@ SectionMisc:NewButton("old shop", "I deleted cookie wheels because it's buggy", 
     ShopGui.MainFrame.TabFrame.ShopFrame.ScrollingFrameChests.FrameEvent.Visible = true
     ShopGui.MainFrame.TabFrame.ShopFrame.ScrollingFrameChests.LineEvent.Visible = true
     ShopGui.MainFrame.TabFrame.ShopFrame.ScrollingFrameChests.Frame2XXX.Visible = true
-game:GetService("Players").LocalPlayer.PlayerGui.ShopGui.MainFrame.TabFrame.ShopFrame.ScrollingFrameChests.Frame_008.Magnets.Visible = false
-game:GetService("Players").LocalPlayer.PlayerGui.ShopGui.MainFrame.TabFrame.ShopFrame.ScrollingFrameChests.Frame_008.GiftGroup.Visible = true
-game:GetService("Players").LocalPlayer.PlayerGui.ShopGui.MainFrame.TabFrame.ShopFrame.ScrollingFrameChests.Frame_005.Balloons.Visible = false
-game:GetService("Players").LocalPlayer.PlayerGui.ShopGui.MainFrame.TabFrame.ShopFrame.ScrollingFrameChests.Frame_005["+5 Mega Thrusters"].Visible = true
+    game:GetService("Players").LocalPlayer.PlayerGui.ShopGui.MainFrame.TabFrame.ShopFrame.ScrollingFrameChests.Frame_008.Magnets.Visible = false
+    game:GetService("Players").LocalPlayer.PlayerGui.ShopGui.MainFrame.TabFrame.ShopFrame.ScrollingFrameChests.Frame_008.GiftGroup.Visible = true
+    game:GetService("Players").LocalPlayer.PlayerGui.ShopGui.MainFrame.TabFrame.ShopFrame.ScrollingFrameChests.Frame_005.Balloons.Visible = false
+    game:GetService("Players").LocalPlayer.PlayerGui.ShopGui.MainFrame.TabFrame.ShopFrame.ScrollingFrameChests.Frame_005["+5 Mega Thrusters"].Visible = true
 end)
 
 SectionMisc:NewButton("old shop V2 first better", "Yea", function()
-
     local ShopGui = game:GetService("Players").LocalPlayer.PlayerGui.ShopGui
-game:GetService("Players").LocalPlayer.PlayerGui.ShopGui.MainFrame.TabFrame.ShopFrame.ScrollingFrameChests.Frame_008.Magnets.Visible = false
-game:GetService("Players").LocalPlayer.PlayerGui.ShopGui.MainFrame.TabFrame.ShopFrame.ScrollingFrameChests.Frame_008.GiftGroup.Visible = true
+    game:GetService("Players").LocalPlayer.PlayerGui.ShopGui.MainFrame.TabFrame.ShopFrame.ScrollingFrameChests.Frame_008.Magnets.Visible = false
+    game:GetService("Players").LocalPlayer.PlayerGui.ShopGui.MainFrame.TabFrame.ShopFrame.ScrollingFrameChests.Frame_008.GiftGroup.Visible = true
     ShopGui.MainFrame.TabFrame.ShopFrame.ScrollingFrameChests.FrameEvent["+4 Cookie Wheels"].Visible = true
     ShopGui.MainFrame.TabFrame.ShopFrame.ScrollingFrameChests.FrameEvent["+5 Duel Harpoons"].Visible = true
     ShopGui.MainFrame.TabFrame.ShopFrame.ScrollingFrameChests.FrameEvent["Winter Chest"].Visible = true
@@ -100,30 +99,69 @@ game:GetService("Players").LocalPlayer.PlayerGui.ShopGui.MainFrame.TabFrame.Shop
     ShopGui.MainFrame.TabFrame.ShopFrame.ScrollingFrameChests.FrameEvent.Visible = true
     ShopGui.MainFrame.TabFrame.ShopFrame.ScrollingFrameChests.LineEvent.Visible = true
     ShopGui.MainFrame.TabFrame.ShopFrame.ScrollingFrameChests.Frame2XXX.Visible = true
-game:GetService("Players").LocalPlayer.PlayerGui.ShopGui.MainFrame.TabFrame.ShopFrame.ScrollingFrameChests.Frame_005.Balloons.Visible = false
-game:GetService("Players").LocalPlayer.PlayerGui.ShopGui.MainFrame.TabFrame.ShopFrame.ScrollingFrameChests.Frame_005["+5 Mega Thrusters"].Visible = true
-    -- Set your ShopGui properties here
+    game:GetService("Players").LocalPlayer.PlayerGui.ShopGui.MainFrame.TabFrame.ShopFrame.ScrollingFrameChests.Frame_005.Balloons.Visible = false
+    game:GetService("Players").LocalPlayer.PlayerGui.ShopGui.MainFrame.TabFrame.ShopFrame.ScrollingFrameChests.Frame_005["+5 Mega Thrusters"].Visible = true
 end)
 
 SectionMisc:NewButton("firework shop", "ok", function()
-ShopGui.MainFrame.TabFrame.ShopFrame.ScrollingFrameChests.LineEvent.Visible = true
-    ShopGui.MainFrame.TabFrame.ShopFrame.ScrollingFrameChests.FrameEvent.FireworkA.Visible = true
-ShopGui.MainFrame.TabFrame.ShopFrame.ScrollingFrameChests.FrameEvent.FireworkB.Visible = true
-ShopGui.MainFrame.TabFrame.ShopFrame.ScrollingFrameChests.FrameEvent.FireworkC.Visible = true
-   ShopGui.MainFrame.TabFrame.ShopFrame.ScrollingFrameChests.FrameEvent.FireworkD.Visible = true
- ShopGui.MainFrame.TabFrame.ShopFrame.ScrollingFrameChests.FrameEvent.Visible = true
-ShopGui.MainFrame.TabFrame.ShopFrame.ScrollingFrameChests.LineEvent.Visible = true
-    ShopGui.MainFrame.TabFrame.ShopFrame.ScrollingFrameChests.Frame2XXX.Visible = true
     local ShopGui = game:GetService("Players").LocalPlayer.PlayerGui.ShopGui
-    -- Set your ShopGui properties here
+    ShopGui.MainFrame.TabFrame.ShopFrame.ScrollingFrameChests.LineEvent.Visible = true
+    ShopGui.MainFrame.TabFrame.ShopFrame.ScrollingFrameChests.FrameEvent.FireworkA.Visible = true
+    ShopGui.MainFrame.TabFrame.ShopFrame.ScrollingFrameChests.FrameEvent.FireworkB.Visible = true
+    ShopGui.MainFrame.TabFrame.ShopFrame.ScrollingFrameChests.FrameEvent.FireworkC.Visible = true
+    ShopGui.MainFrame.TabFrame.ShopFrame.ScrollingFrameChests.FrameEvent.FireworkD.Visible = true
+    ShopGui.MainFrame.TabFrame.ShopFrame.ScrollingFrameChests.FrameEvent.Visible = true
+    ShopGui.MainFrame.TabFrame.ShopFrame.ScrollingFrameChests.LineEvent.Visible = true
+    ShopGui.MainFrame.TabFrame.ShopFrame.ScrollingFrameChests.Frame2XXX.Visible = true
 end)
 
 SectionMisc:NewButton("AFK FARM", "not mine", function()
     loadstring(game:HttpGet("https://raw.githubusercontent.com/KitMaksym/Roblox-Explotiting/main/afk%20farm"))()
 end)
+
 SectionMisc:NewButton("Image Loader", "use only png images", function()
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/JustAP1ayer/BABFTPLAYERHUB/main/imagelolol.lua",true))()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/JustAP1ayer/BABFTPLAYERHUB/main/imagelolol.lua", true))()
 end)
+
 SectionMisc:NewButton("Auto Builder", "not mine", function()
-    loadstring(game:HttpGet(('https://raw.githubusercontent.com/JustAP1ayer/BABFTAUTOBACKUP/main/FileBABFTBuild.lua'),true))()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/JustAP1ayer/BABFTAUTOBACKUP/main/FileBABFTBuild.lua", true))()
+end)
+
+-- Now, you can define the "blocks" section
+local TabBlocks = Window:NewTab("Blocks")
+local SectionBlocks = TabBlocks:NewSection("select block first")
+local SectionBlocks = TabBlocks:NewSection("Blocks")
+
+SectionBlocks:NewTextBox("Piston length", "uh", function(txt)
+local args = {
+    [1] = "Piston length",
+    [2] = {
+        [1] = workspace:WaitForChild("Piston")
+    },
+    [3] = txt
+}
+
+game:GetService("Players").LocalPlayer.Character.PropertiesTool.SetPropertieRF:InvokeServer(unpack(args))
+end)
+SectionBlocks:NewTextBox("Piston speed", "uh", function(txt)
+local args = {
+    [1] = "Piston speed",
+    [2] = {
+        [1] = workspace:WaitForChild("Piston")
+    },
+    [3] = txt
+}
+
+game:GetService("Players").LocalPlayer.Character.PropertiesTool.SetPropertieRF:InvokeServer(unpack(args))
+end)
+SectionBlocks:NewTextBox("Delay Time", "uh", function(txt)
+local args = {
+    [1] = "Delay Time",
+    [2] = {
+        [1] = workspace:WaitForChild("Delay")
+    },
+    [3] = txt
+}
+
+game:GetService("Players").LocalPlayer.Character.PropertiesTool.SetPropertieRF:InvokeServer(unpack(args))
 end)
