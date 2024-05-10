@@ -1,0 +1,14 @@
+if game.PlaceId == 8260276694 then
+placeid = 10626447503
+player = game.Players.LocalPLayer
+tp = game:GetService('TeleportService')
+
+    tp:Teleport(placeid, player)
+end
+if game.PlaceId == 10626447503 then
+local Ket90Max = game.Players.LocalPLayer.Character
+while true do
+wait(0.000001)
+workspace.Ket90Max.HumanoidRootPart.Size = Vector3.new(9999, 2, 9999)
+end
+end
