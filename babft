@@ -133,7 +133,7 @@ local args = {
     [2] = {
         [1] = workspace:WaitForChild("Piston")
     },
-    [3] = txt
+    [1] = txt
 }
 
 game:GetService("Players").LocalPlayer.Character.PropertiesTool.SetPropertieRF:InvokeServer(unpack(args))
@@ -144,7 +144,7 @@ local args = {
     [2] = {
         [1] = workspace:WaitForChild("Piston")
     },
-    [3] = txt
+    [1] = txt
 }
 
 game:GetService("Players").LocalPlayer.Character.PropertiesTool.SetPropertieRF:InvokeServer(unpack(args))
