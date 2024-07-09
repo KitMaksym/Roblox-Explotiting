@@ -162,7 +162,3 @@ local args = {
 
 game:GetService("Players").LocalPlayer.Character.PropertiesTool.SetPropertieRF:InvokeServer(unpack(args))
 end)
-
-SectionMisc:NewButton("Auto Builder", "not mine", function()
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/JustAP1ayer/BABFTAUTOBACKUP/main/FileBABFTBuild.lua", true))()
-end)
