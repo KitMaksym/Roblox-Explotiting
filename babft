@@ -118,7 +118,9 @@ end)
 SectionMisc:NewButton("AFK FARM", "not mine", function()
     loadstring(game:HttpGet("https://raw.githubusercontent.com/KitMaksym/Roblox-Explotiting/main/afk%20farm"))()
 end)
-
+SectionMisc:NewButton("Autobuild", "cool", function()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/max2007killer/auto-build-not-limit/main/buildaboatv2obs.txt"))()
+end)
 SectionMisc:NewButton("Image Loader", "use only png images", function()
     loadstring(game:HttpGet("https://raw.githubusercontent.com/JustAP1ayer/BABFTPLAYERHUB/main/imagelolol.lua", true))()
 end)
@@ -133,7 +135,7 @@ local args = {
     [2] = {
         [1] = workspace:WaitForChild("Piston")
     },
-    [1] = txt
+    [3] = txt
 }
 
 game:GetService("Players").LocalPlayer.Character.PropertiesTool.SetPropertieRF:InvokeServer(unpack(args))
@@ -144,7 +146,7 @@ local args = {
     [2] = {
         [1] = workspace:WaitForChild("Piston")
     },
-    [1] = txt
+    [3] = txt
 }
 
 game:GetService("Players").LocalPlayer.Character.PropertiesTool.SetPropertieRF:InvokeServer(unpack(args))
