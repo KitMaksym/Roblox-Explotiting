@@ -11,3 +11,7 @@ if game.PlaceId == 9872472334 then
     local scriptUrl = "https://raw.githubusercontent.com/KitMaksym/Roblox-Explotiting/main/evade"
     loadstring(game:HttpGet(scriptUrl))()
 end
+if game.PlaceId == 109983668079237 then
+    local scriptUrl = "https://raw.githubusercontent.com/KitMaksym/Roblox-Explotiting/refs/heads/main/steal%20a%20brainrot"
+    loadstring(game:HttpGet(scriptUrl))()
+end
