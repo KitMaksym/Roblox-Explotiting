@@ -131,7 +131,7 @@ local MutationSettings = {
 local activeESP = {
     ["Mythic"] = false,
     ["Brainrot God"] = false,
-    ["Secret"] = false
+    ["Secret"] = true
 }
 
 local function CreateToggleButton(name, callback, color)
