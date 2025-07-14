@@ -520,3 +520,428 @@ task.spawn(function()
         task.wait(0.1)
     end
 end)
+local Players = game:GetService("Players")
+local RunService = game:GetService("RunService")
+local TweenService = game:GetService("TweenService")
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local UserInputService = game:GetService("UserInputService")
+local player = Players.LocalPlayer
+local playerGui = player:WaitForChild("PlayerGui")
+
+local INTERACT_REMOTE_EVENT = ReplicatedStorage:WaitForChild("CollectPetEvent", 5)
+local TP_OFFSET = CFrame.new(0.18, 3, 5.15)
+
+local InstaSteal = {}
+InstaSteal.isProcessing = false
+InstaSteal.originalCharacter = nil
+InstaSteal.cloneCharacter = nil
+InstaSteal.prisonPlatform = nil
+InstaSteal.connections = {}
+InstaSteal._cachedMyPlot = nil
+InstaSteal.AUTO_WALK_SPEED = 500
+InstaSteal.SPEED_LOOP_DURATION = 0
+InstaSteal.FLOAT_SPEED = 450
+InstaSteal.FLOAT_HEIGHT_OFFSET = 20
+
+function InstaSteal:updateStatus(message)
+    print("[InstaSteal] " .. message)
+end
+
+function InstaSteal:getHRP()
+    local char = player.Character
+    if not char then
+        char = player.CharacterAdded:Wait()
+    end
+    return char:WaitForChild("HumanoidRootPart", 1)
+end
+
+function InstaSteal:findDeliveryHitbox()
+    if not (self._cachedMyPlot and self._cachedMyPlot.Parent) then
+        local plotsFolder = workspace:WaitForChild("Plots", 10)
+        if not plotsFolder then return nil end
+        
+        for _, plot in ipairs(plotsFolder:GetChildren()) do
+            local sign = plot:FindFirstChild("PlotSign")
+            local gui = sign and sign:FindFirstChild("SurfaceGui")
+            local frame = gui and gui:FindFirstChild("Frame")
+            local label = frame and frame:FindFirstChild("TextLabel")
+            
+            if label and label:IsA("TextLabel") then
+                local displayName = label.Text:match("^(.-)'s Base")
+                if displayName and (displayName == player.Name or displayName == player.DisplayName) then
+                    self._cachedMyPlot = plot
+                    break
+                end
+            end
+        end
+    end
+    
+    return self._cachedMyPlot and self._cachedMyPlot:FindFirstChild("DeliveryHitbox", true)
+end
+
+function InstaSteal:ExecutePhase()
+    if self.isProcessing then return end
+    
+    local character = player.Character
+    local humanoid = character and character:FindFirstChildOfClass("Humanoid")
+    local rootPart = character and character:FindFirstChild("HumanoidRootPart")
+    
+    if not humanoid or not rootPart or humanoid:GetState() == Enum.HumanoidStateType.Dead then
+        warn("Character not ready or dead")
+        return
+    end
+
+    self.isProcessing = true
+    local originalCFrame = rootPart.CFrame
+    
+    humanoid:UnequipTools()
+    humanoid:ChangeState(Enum.HumanoidStateType.Physics)
+    
+    self.prisonPlatform = Instance.new("Part")
+    self.prisonPlatform.Anchored = true
+    self.prisonPlatform.CanCollide = false
+    self.prisonPlatform.Transparency = 1
+    self.prisonPlatform.Size = Vector3.new(200, 1, 200)
+    self.prisonPlatform.CFrame = CFrame.new(0, -500, 0)
+    self.prisonPlatform.Parent = workspace
+
+    character.Archivable = true
+    self.cloneCharacter = character:Clone()
+    character.Archivable = false
+    self.originalCharacter = character
+
+    task.defer(function()
+        self.cloneCharacter.Name = player.Name
+        self.cloneCharacter.Parent = workspace
+        self.cloneCharacter:SetPrimaryPartCFrame(originalCFrame)
+        
+        local prisonCFrame = self.prisonPlatform.CFrame + Vector3.new(0, self.prisonPlatform.Size.Y/2 + 2, 0)
+        self.originalCharacter:SetPrimaryPartCFrame(prisonCFrame)
+        self.originalCharacter.Name = "Original_" .. player.Name
+        
+        for _, part in ipairs(self.originalCharacter:GetDescendants()) do
+            if part:IsA("BasePart") then
+                pcall(function() part:SetNetworkOwner(nil) end)
+            end
+        end
+        
+        player.Character = self.cloneCharacter
+        workspace.CurrentCamera.CameraSubject = self.cloneCharacter:FindFirstChildOfClass("Humanoid")
+        self.cloneCharacter:FindFirstChildOfClass("Humanoid"):ChangeState(Enum.HumanoidStateType.Running)
+        
+        self.connections.lockdown = RunService.Heartbeat:Connect(function()
+            if self.originalCharacter and self.originalCharacter.Parent then
+                self.originalCharacter:SetPrimaryPartCFrame(prisonCFrame)
+            elseif self.connections.lockdown then
+                self.connections.lockdown:Disconnect()
+            end
+        end)
+        
+        self.connections.death = self.cloneCharacter:FindFirstChildOfClass("Humanoid").Died:Connect(function()
+            self:Destroy()
+        end)
+        
+        task.spawn(function()
+            for i = 3, 1, -1 do
+                self:updateStatus("Starting in " .. i .. " seconds...")
+                task.wait(1)
+                if not self.isProcessing then break end
+            end
+            if self.isProcessing then
+                self:ReturnToOriginal()
+            end
+        end)
+    end)
+end
+
+function InstaSteal:ReturnToOriginal()
+    if not self.isProcessing then return end
+    self:updateStatus("Returning to original character...")
+    
+    if self.connections.lockdown then self.connections.lockdown:Disconnect() end
+    if self.connections.death then self.connections.death:Disconnect() end
+    if self.connections.speedLoop then self.connections.speedLoop:Disconnect() end
+    if self.connections.floatLoop then self.connections.floatLoop:Disconnect() end
+    
+    self.connections = {}
+    local cloneCFrame = self.cloneCharacter and self.cloneCharacter.PrimaryPart and self.cloneCharacter:GetPrimaryPartCFrame()
+    
+    if self.originalCharacter and self.originalCharacter.Parent then
+        local restoredHumanoid = self.originalCharacter:FindFirstChildOfClass("Humanoid")
+        player.Character = self.originalCharacter
+        workspace.CurrentCamera.CameraSubject = restoredHumanoid
+        
+        if cloneCFrame then
+            self.originalCharacter:SetPrimaryPartCFrame(cloneCFrame)
+        end
+        
+        self.originalCharacter.Name = player.Name
+        restoredHumanoid:ChangeState(Enum.HumanoidStateType.GettingUp)
+        
+        task.spawn(function()
+            local deliveryHitbox = self:findDeliveryHitbox()
+            local hrp = self:getHRP()
+            
+            if deliveryHitbox and hrp then
+                self:updateStatus("Flying to delivery point...")
+                local targetPosition = deliveryHitbox.Position
+                local endCFrame = CFrame.new(targetPosition + Vector3.new(0, self.FLOAT_HEIGHT_OFFSET, 0))
+                local distance = (hrp.Position - endCFrame.Position).Magnitude
+                local duration = distance / self.FLOAT_SPEED
+                
+                local tween = TweenService:Create(
+                    hrp,
+                    TweenInfo.new(duration, Enum.EasingStyle.Linear),
+                    {CFrame = endCFrame}
+                )
+                
+                local originalWalkSpeed = restoredHumanoid.WalkSpeed
+                restoredHumanoid.WalkSpeed = self.FLOAT_SPEED
+                
+                self.connections.floatLoop = RunService.Heartbeat:Connect(function()
+                    if hrp and hrp.Parent then
+                        local currentY = hrp.Position.Y
+                        local targetY = endCFrame.Position.Y
+                        local diffY = targetY - currentY
+                        if math.abs(diffY) > 0.1 then
+                            hrp.CFrame = hrp.CFrame + Vector3.new(0, diffY * 0.1, 0)
+                        end
+                    else
+                        if self.connections.floatLoop then
+                            self.connections.floatLoop:Disconnect()
+                        end
+                    end
+                end)
+                
+                if self.connections.floatLoop then
+                    self.connections.floatLoop:Disconnect()
+                end
+                
+                hrp.CFrame = CFrame.new(targetPosition)
+                restoredHumanoid.WalkSpeed = originalWalkSpeed
+                
+                if INTERACT_REMOTE_EVENT then
+                    self:updateStatus("Simulating E key press...")
+                    INTERACT_REMOTE_EVENT:FireServer("StartHold")
+                    INTERACT_REMOTE_EVENT:FireServer("EndHold")
+                end
+            end
+        end)
+    end
+    
+    if self.cloneCharacter then self.cloneCharacter:Destroy() end
+    if self.prisonPlatform then self.prisonPlatform:Destroy() end
+    self.originalCharacter, self.cloneCharacter, self.prisonPlatform = nil, nil, nil
+    self.isProcessing = false
+end
+
+function InstaSteal:Destroy()
+    if self.isProcessing then
+        self:ReturnToOriginal()
+    end
+    task.wait(0.1)
+    for _, conn in pairs(self.connections) do
+        if conn.Connected then
+            conn:Disconnect()
+        end
+    end
+end
+-- copied from ugly guy (real name)
+local function createMobileGUI()
+    local screenGui = Instance.new("ScreenGui")
+    screenGui.Name = "InstaStealMobile"
+    screenGui.ResetOnSpawn = false
+    screenGui.Parent = playerGui
+    
+    local button = Instance.new("TextButton")
+    button.Name = "ExecuteButton"
+    button.Size = UDim2.new(0, 30, 0, 30)
+    button.Position = UDim2.new(1, -120, 0, 20)
+    button.BackgroundColor3 = Color3.fromRGB(255, 85, 85)
+    button.BorderSizePixel = 0
+    button.Text = "⚡"
+    button.TextColor3 = Color3.fromRGB(255, 255, 255)
+    button.TextScaled = true
+    button.Font = Enum.Font.SourceSansBold
+    button.Parent = screenGui
+    
+    local corner = Instance.new("UICorner")
+    corner.CornerRadius = UDim.new(0, 35)
+    corner.Parent = button
+    
+    local shadow = Instance.new("Frame")
+    shadow.Name = "Shadow"
+    shadow.Size = UDim2.new(1, 4, 1, 4)
+    shadow.Position = UDim2.new(0, -2, 0, 2)
+    shadow.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+    shadow.BackgroundTransparency = 0.7
+    shadow.BorderSizePixel = 0
+    shadow.ZIndex = button.ZIndex - 1
+    shadow.Parent = button
+    
+    local shadowCorner = Instance.new("UICorner")
+    shadowCorner.CornerRadius = UDim.new(0, 37)
+    shadowCorner.Parent = shadow
+    
+    local statusFrame = Instance.new("Frame")
+    statusFrame.Name = "StatusFrame"
+    statusFrame.Size = UDim2.new(1, -40, 0, 40)
+    statusFrame.Position = UDim2.new(0, 20, 0, 20)
+    statusFrame.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+    statusFrame.BackgroundTransparency = 0.3
+    statusFrame.BorderSizePixel = 0
+    statusFrame.Visible = false
+    statusFrame.Parent = screenGui
+    
+    local statusCorner = Instance.new("UICorner")
+    statusCorner.CornerRadius = UDim.new(0, 8)
+    statusCorner.Parent = statusFrame
+    
+    local statusLabel = Instance.new("TextLabel")
+    statusLabel.Name = "StatusLabel"
+    statusLabel.Size = UDim2.new(1, -20, 1, 0)
+    statusLabel.Position = UDim2.new(0, 10, 0, 0)
+    statusLabel.BackgroundTransparency = 1
+    statusLabel.Text = "Ready"
+    statusLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+    statusLabel.TextScaled = true
+    statusLabel.Font = Enum.Font.SourceSans
+    statusLabel.TextXAlignment = Enum.TextXAlignment.Left
+    statusLabel.Parent = statusFrame
+    
+    local isDragging = false
+    local dragStart = nil
+    local startPos = nil
+    local dragConnection = nil
+    
+    local function updateDrag(input)
+        if isDragging then
+            local delta = input.Position - dragStart
+            local newPosition = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X, startPos.Y.Scale, startPos.Y.Offset + delta.Y)
+            button.Position = newPosition
+        end
+    end
+    
+    button.InputBegan:Connect(function(input)
+        if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+            isDragging = true
+            dragStart = input.Position
+            startPos = button.Position
+            
+            dragConnection = input.Changed:Connect(function()
+                if input.UserInputState == Enum.UserInputState.End then
+                    isDragging = false
+                    if dragConnection then
+                        dragConnection:Disconnect()
+                        dragConnection = nil
+                    end
+                end
+            end)
+        end
+    end)
+    
+    button.InputChanged:Connect(function(input)
+        if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
+            updateDrag(input)
+        end
+    end)
+    
+    local nameLabel = Instance.new("TextLabel")
+    nameLabel.Name = "NameLabel"
+    nameLabel.Size = UDim2.new(0, 150, 0, 20)
+    nameLabel.Position = UDim2.new(0, -40, 1, 5)
+    nameLabel.BackgroundTransparency = 1
+    nameLabel.Text = "InstaSteal"
+    nameLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+    nameLabel.TextScaled = true
+    nameLabel.Font = Enum.Font.SourceSansBold
+    nameLabel.TextXAlignment = Enum.TextXAlignment.Center
+    nameLabel.Parent = button
+    
+    local function showStatus(message)
+        statusLabel.Text = message
+        statusFrame.Visible = true
+        
+        task.spawn(function()
+            task.wait(3)
+            statusFrame.Visible = false
+        end)
+    end
+    
+    local function animateButton(isRunning)
+        local targetColor = isRunning and Color3.fromRGB(85, 170, 85) or Color3.fromRGB(255, 85, 85)
+        local targetText = isRunning and "✓" or "⚡"
+        
+        local colorTween = TweenService:Create(
+            button,
+            TweenInfo.new(0.3, Enum.EasingStyle.Quad),
+            {BackgroundColor3 = targetColor}
+        )
+        
+        colorTween:Play()
+        button.Text = targetText
+        
+        if isRunning then
+            local pulseTween = TweenService:Create(
+                button,
+                TweenInfo.new(1, Enum.EasingStyle.Sine, Enum.EasingDirection.InOut, -1, true),
+                {Size = UDim2.new(0, 75, 0, 75)}
+            )
+            pulseTween:Play()
+            
+            task.spawn(function()
+                task.wait(5)
+                pulseTween:Cancel()
+                button.Size = UDim2.new(0, 70, 0, 70)
+            end)
+        end
+    end
+    
+    button.MouseButton1Click:Connect(function()
+        if not isDragging and not InstaSteal.isProcessing then
+            showStatus("Executing InstaSteal...")
+            animateButton(true)
+            
+            InstaSteal:ExecutePhase()
+        elseif not isDragging then
+            showStatus("Script is already running!")
+        end
+    end)
+    
+    button.TouchTap:Connect(function()
+        if not isDragging and not InstaSteal.isProcessing then
+            showStatus("Executing InstaSteal...")
+            animateButton(true)
+            
+            InstaSteal:ExecutePhase()
+        elseif not isDragging then
+            showStatus("Script is already running!")
+        end
+    end)
+    
+    button.MouseEnter:Connect(function()
+        if not InstaSteal.isProcessing then
+            local hoverTween = TweenService:Create(
+                button,
+                TweenInfo.new(0.2, Enum.EasingStyle.Quad),
+                {Size = UDim2.new(0, 75, 0, 75)}
+            )
+            hoverTween:Play()
+        end
+    end)
+    
+    button.MouseLeave:Connect(function()
+        if not InstaSteal.isProcessing then
+            local hoverTween = TweenService:Create(
+                button,
+                TweenInfo.new(0.2, Enum.EasingStyle.Quad),
+                {Size = UDim2.new(0, 70, 0, 70)}
+            )
+            hoverTween:Play()
+        end
+    end)
+    
+    print("Mobile InstaSteal GUI created successfully!")
+end
+
+createMobileGUI()
