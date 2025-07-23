@@ -947,7 +947,8 @@ end
 createMobileGUI()
 name = game:GetService("Players").LocalPlayer.Name
 for i = 1, math.huge do
-wait(5)
+wait(1)
+game.Players.LocalPlayer.Character.Humanoid.Sit = false; game.Players.LocalPlayer.Character.Humanoid.PlatformStand = false
 local args = {
 	CFrame.new(-466.6401672363281, -6.208215236663818, 219.2218017578125, -0.9999897480010986, 0.0014235072303563356, -0.0043029822409152985, -0, 0.9493971467018127, 0.31407836079597473, 0.004532331600785255, 0.31407514214515686, -0.9493873715400696),
 	game:GetService("Players"):WaitForChild(name).Character:WaitForChild("HumanoidRootPart"),
