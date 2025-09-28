@@ -1,0 +1,221 @@
+local Rayfield = loadstring(game:HttpGet("https://sirius.menu/rayfield"))()
+
+local Window = Rayfield:CreateWindow({
+    Name = "Globber TP + Movement + AutoPlay + Obby",
+    Theme = "Default",
+    ToggleUIKeybind = "K",
+    ConfigurationSaving = { Enabled = true, FileName = "GlobberSuite" }
+})
+
+local Main = Window:CreateTab("Main", "play")
+
+local Players = game:GetService("Players")
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local LocalPlayer = Players.LocalPlayer
+
+local function getHRP()
+    local char = LocalPlayer.Character
+    if not char then return nil end
+    return char:FindFirstChild("HumanoidRootPart")
+end
+
+local targetNames = {Globber=true, MassiveGlobber=true, GiantGlobber=true}
+
+local function bringToHRP(inst, hrp)
+    if not hrp then return end
+    if inst:IsDescendantOf(LocalPlayer.Character) then return end
+    if inst:IsA("Model") then
+        pcall(function() inst:PivotTo(hrp.CFrame) end)
+    elseif inst:IsA("BasePart") then
+        pcall(function() inst.CFrame = hrp.CFrame end)
+    end
+end
+
+local function tpGlobbersOnce()
+    local hrp = getHRP()
+    if not hrp then return end
+    for _, inst in ipairs(game:GetDescendants()) do
+        if targetNames[inst.Name] then
+            bringToHRP(inst, hrp)
+        end
+    end
+end
+
+local globberActive = false
+local globberThread = nil
+local function startGlobberLoop()
+    if globberThread then return end
+    globberThread = task.spawn(function()
+        while globberActive do
+            tpGlobbersOnce()
+            task.wait(0.5)
+        end
+        globberThread = nil
+    end)
+end
+
+local AutoTPToggle = Main:CreateToggle({
+    Name = "Auto TP Globbers to HRP",
+    CurrentValue = false,
+    Flag = "AutoTPToggle",
+    Callback = function(on)
+        globberActive = on
+        if on then startGlobberLoop() end
+    end
+})
+
+local currentWS = 16
+local currentJP = 50
+
+local function applyMovement()
+    local char = LocalPlayer.Character
+    if not char then return end
+    local hum = char:FindFirstChildOfClass("Humanoid")
+    if hum then
+        hum.WalkSpeed = currentWS
+        hum.JumpPower = currentJP
+    end
+end
+
+LocalPlayer.CharacterAdded:Connect(function()
+    task.wait(0.1)
+    applyMovement()
+end)
+
+local WSSlider = Main:CreateSlider({
+    Name = "WalkSpeed",
+    Range = {8, 200},
+    Increment = 1,
+    Suffix = "ws",
+    CurrentValue = currentWS,
+    Flag = "WalkSpeedFlag",
+    Callback = function(v)
+        currentWS = v
+        applyMovement()
+    end
+})
+
+local JPSlider = Main:CreateSlider({
+    Name = "JumpPower",
+    Range = {0, 200},
+    Increment = 1,
+    Suffix = "jp",
+    CurrentValue = currentJP,
+    Flag = "JumpPowerFlag",
+    Callback = function(v)
+        currentJP = v
+        applyMovement()
+    end
+})
+
+local autoPlayActive = false
+local autoPlayThread = nil
+local function startAutoPlay()
+    if autoPlayThread then return end
+    autoPlayThread = task.spawn(function()
+        while autoPlayActive do
+            local r = ReplicatedStorage:FindFirstChild("ElevatorButtonclicked")
+            if r and r.FireServer then
+                pcall(function() r:FireServer() end)
+            end
+            task.wait(0.1)
+        end
+        autoPlayThread = nil
+    end)
+end
+
+local AutoPlayToggle = Main:CreateToggle({
+    Name = "Auto Play (ElevatorButtonclicked)",
+    CurrentValue = false,
+    Flag = "AutoPlay",
+    Callback = function(on)
+        autoPlayActive = on
+        if on then startAutoPlay() end
+    end
+})
+
+local function findStart()
+    for _, inst in ipairs(workspace:GetDescendants()) do
+        if inst.Name == "Start" and (inst:IsA("BasePart") or inst:IsA("Model")) then
+            return inst
+        end
+    end
+end
+
+local function getInstCFrame(inst)
+    if inst:IsA("Model") then
+        local ok, cf = pcall(function() return inst:GetPivot() end)
+        if ok then return cf end
+    elseif inst:IsA("BasePart") then
+        return inst.CFrame
+    end
+    return nil
+end
+
+local function tpToCFrame(cf)
+    local char = LocalPlayer.Character
+    if not char or not cf then return end
+    pcall(function() char:PivotTo(cf) end)
+end
+
+local obbyActive = false
+local obbyThread = nil
+local function startObbyLoop()
+    if obbyThread then return end
+    obbyThread = task.spawn(function()
+        while obbyActive do
+            local target = nil
+            repeat
+                if not obbyActive then break end
+                target = findStart()
+                if not target then task.wait(0.1) end
+            until target or not obbyActive
+            if not obbyActive then break end
+            if target then
+                local cf = getInstCFrame(target)
+                if cf then
+                    for i = 1, 5 do
+                        tpToCFrame(cf)
+                        task.wait(0.05)
+                    end
+                    task.delay(1, function()
+                        pcall(function() target:Destroy() end)
+                    end)
+                end
+            end
+            task.wait(0.1)
+        end
+        obbyThread = nil
+    end)
+end
+
+local AutoObbyToggle = Main:CreateToggle({
+    Name = "Auto Win Obby",
+    CurrentValue = false,
+    Flag = "AutoWinObby",
+    Callback = function(on)
+        obbyActive = on
+        if on then startObbyLoop() end
+    end
+})
+
+Rayfield:LoadConfiguration()
+
+currentWS = WSSlider.CurrentValue
+currentJP = JPSlider.CurrentValue
+applyMovement()
+
+if AutoTPToggle.CurrentValue then
+    globberActive = true
+    startGlobberLoop()
+end
+
+if AutoPlayToggle.CurrentValue then
+    autoPlayActive = true
+    startAutoPlay()
+end
+
+if AutoObbyToggle.CurrentValue then
+    obbyActive = true
+    startObbyLoop()
+end
