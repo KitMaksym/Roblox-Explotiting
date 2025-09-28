@@ -1,7 +1,7 @@
 local Rayfield = loadstring(game:HttpGet("https://sirius.menu/rayfield"))()
 
 local Window = Rayfield:CreateWindow({
-    Name = "Globber TP + Movement + AutoPlay + Obby",
+    Name = "windows",
     Theme = "Default",
     ToggleUIKeybind = "K",
     ConfigurationSaving = { Enabled = true, FileName = "GlobberSuite" }
@@ -55,7 +55,7 @@ local function startGlobberLoop()
 end
 
 local AutoTPToggle = Main:CreateToggle({
-    Name = "Auto TP Globbers to HRP",
+    Name = "auto collect globbers",
     CurrentValue = false,
     Flag = "AutoTPToggle",
     Callback = function(on)
@@ -77,9 +77,11 @@ local function applyMovement()
     end
 end
 
-LocalPlayer.CharacterAdded:Connect(function()
+LocalPlayer.CharacterAdded:Connect(function(c)
     task.wait(0.1)
     applyMovement()
+    local h = c:FindFirstChildOfClass("Humanoid")
+    if h then h.PlatformStand = false end
 end)
 
 local WSSlider = Main:CreateSlider({
@@ -125,7 +127,7 @@ local function startAutoPlay()
 end
 
 local AutoPlayToggle = Main:CreateToggle({
-    Name = "Auto Play (ElevatorButtonclicked)",
+    Name = "Auto click button",
     CurrentValue = false,
     Flag = "AutoPlay",
     Callback = function(on)
@@ -152,10 +154,15 @@ local function getInstCFrame(inst)
     return nil
 end
 
-local function tpToCFrame(cf)
+local function teleportAboveStart(cf)
     local char = LocalPlayer.Character
     if not char or not cf then return end
-    pcall(function() char:PivotTo(cf) end)
+    local hum = char:FindFirstChildOfClass("Humanoid")
+    if hum then hum.PlatformStand = false end
+    local pos = cf.Position + Vector3.new(0, 20, 0)
+    pcall(function() char:PivotTo(CFrame.new(pos)) end)
+    local hum2 = char:FindFirstChildOfClass("Humanoid")
+    if hum2 then hum2.PlatformStand = false end
 end
 
 local obbyActive = false
@@ -175,12 +182,11 @@ local function startObbyLoop()
                 local cf = getInstCFrame(target)
                 if cf then
                     for i = 1, 5 do
-                        tpToCFrame(cf)
+                        teleportAboveStart(cf)
                         task.wait(0.05)
                     end
-                    task.delay(1, function()
-                        pcall(function() target:Destroy() end)
-                    end)
+                    task.wait(5)
+                    pcall(function() target:Destroy() end)
                 end
             end
             task.wait(0.1)
