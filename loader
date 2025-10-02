@@ -26,7 +26,7 @@ if game.PlaceId == 8176084767 then
     local scriptUrl = "https://raw.githubusercontent.com/KitMaksym/Roblox-Explotiting/refs/heads/main/pm%206%3A06"
     loadstring(game:HttpGet(scriptUrl))()
 end
-if game.PlaceId == 132549380532103 then
+if game.PlaceId == 108529227458920 then
     local scriptUrl = "https://raw.githubusercontent.com/KitMaksym/Roblox-Explotiting/refs/heads/main/windows"
     loadstring(game:HttpGet(scriptUrl))()
 end
